@@ -40,6 +40,27 @@
     </div>
 </div>
 
+<script>
 
+    document.querySelectorAll(".plane div").forEach((el,index) => {
+        el.addEventListener("click", () => {
+           fetch("/data?player="+location.pathname+"&index="+index)
+           
+            // el.innerHTML = "X";
+            // el.style.cssText = `
+            // color: red;
+            // display: flex;
+            // justify-content: center;
+            // align-items: center;
+            // font-size: 8vw;
+            
+            // `;
+            
+            
+            console.log(index);
+        })
+          
+    })
+</script>
 </body>
 </html>
