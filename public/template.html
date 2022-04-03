@@ -57,10 +57,30 @@
             // `;
             
             
-            console.log(index);
+            // console.log(index);
         })
           
     })
-</script>
+
+
+    setInterval(() => {
+        
+        fetch("/sendData")
+        .then(r => r.json ())
+        .then(r => {
+            // console.log(r)
+            r.forEach((info, index) => {
+                // console.log(index+" | "+ info)
+                document.querySelectorAll(".plane div")[index].innerText = info;
+            })
+    
+        })
+
+
+    }, 200)
+
+
+
+    </script>
 </body>
 </html>
