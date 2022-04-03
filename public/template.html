@@ -70,29 +70,23 @@
         // let sign = "";
             if (key == "/kolko"){return  "⭕"}
             if (key == "/krzyzyk"){return  "❌"}
-            return "";
-
-        
+            return "";    
     }
-
-
-    setInterval(() => {
-        
+    const interval = setInterval(() => {
         fetch("/sendData")
         .then(r => r.json ())
         .then(r => {
+            if(r.over){
+                clearInterval(interval);
+                
+            }
+
             document.querySelector(".kolej").innerText = sign (r.possibilities[r.turn]);    
             r.plane.forEach((info, index) => {
                 document.querySelectorAll(".plane div")[index].innerText = sign(info);
             })
-            
-            
-            
-            // console.log(index);
-            
-        })
-        
 
+        })   
     }, 200)
 
 
