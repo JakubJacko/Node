@@ -16,15 +16,22 @@
     }
     .plane div {
         border: 2px solid black;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 8vw;
+        cursor: pointer;
     }
-    @media (min-width: 850px) {
+    /* @media (min-width: 850px) {
         .plane {
             display: grid;
             grid-template-columns: 10vw 10vw 10vw;
             grid-template-rows: 10vw 10vw 10vw;
         }
-    }
+    } */
 </style>
+
+<h1>Kolej: <b class="kolej"></b></h1>
 
 <div class="wrapper">
     <div class="plane">
@@ -41,26 +48,32 @@
 </div>
 
 <script>
-
+    
     document.querySelectorAll(".plane div").forEach((el,index) => {
         el.addEventListener("click", () => {
-           fetch("/data?player="+location.pathname+"&index="+index)
-           
+            fetch("/data?player="+location.pathname+"&index="+index)
+            
             // el.innerHTML = "X";
-            // el.style.cssText = `
+            // sign.style.cssText = `
             // color: red;
             // display: flex;
             // justify-content: center;
             // align-items: center;
             // font-size: 8vw;
-            
             // `;
-            
-            
-            // console.log(index);
         })
           
     })
+    
+    
+    const sign = (key) => { 
+        // let sign = "";
+            if (key == "/kolko"){return  "⭕"}
+            if (key == "/krzyzyk"){return  "❌"}
+            return "";
+
+        
+    }
 
 
     setInterval(() => {
@@ -68,14 +81,17 @@
         fetch("/sendData")
         .then(r => r.json ())
         .then(r => {
-            // console.log(r)
-            r.forEach((info, index) => {
-                // console.log(index+" | "+ info)
-                document.querySelectorAll(".plane div")[index].innerText = info;
+            document.querySelector(".kolej").innerText = sign (r.possibilities[r.turn]);    
+            r.plane.forEach((info, index) => {
+                document.querySelectorAll(".plane div")[index].innerText = sign(info);
             })
-    
+            
+            
+            
+            // console.log(index);
+            
         })
-
+        
 
     }, 200)
 

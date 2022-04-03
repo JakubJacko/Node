@@ -5,9 +5,16 @@ const app = express()
 
 const game = {
     plane : ['','','','','','','','',''],
+    possibilities : ["/kolko","/krzyzyk"],
+    turn : 0,
+    
     makeSign(player, index){
-        this.plane[index] = player;
-        // console.log(this.plane)
+        if (this.possibilities[this.turn] == player){
+            this.plane[index] = player;
+            this.turn = this.turn == 0 ? 1 : 0;
+            
+        }
+
     }
 
 
@@ -27,7 +34,7 @@ app.get('/data', (req, res) => {
 })
 
 app.get('/sendData', (req, res) => {
-    res.send(game.plane)
+    res.send(game)
 
 
 })
