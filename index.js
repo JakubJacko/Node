@@ -9,9 +9,11 @@ const game = {
     turn : 0,
     over : false,
     makeSign(player, index){
-        if (this.possibilities[this.turn] == player && this.plane[index] == ''){
-            this.plane[index] = player;
-            this.turn = this.turn == 0 ? 1 : 0;
+        if (this.possibilities[this.turn] == player 
+            && this.plane[index] == ''
+            && !this.over){
+                this.plane[index] = player;
+                this.turn = this.turn == 0 ? 1 : 0;
             if(this.checkWin()){
                 this.over = true;
             }
